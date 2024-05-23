@@ -93,7 +93,7 @@
       email: null,
       pswd: null,
 
-      rules: {
+      rules: { // 匹配规则，需满足才能提交
         email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
         length: len => v =>
           (v || '').length >= len ||

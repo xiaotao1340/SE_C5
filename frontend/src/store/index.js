@@ -3,6 +3,6 @@ import user from './user'
 
 export default createStore({
     modules: {
-      user:user
+      user:user // 暴露 user.js 提供的接口
     }
 })

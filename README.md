@@ -15,6 +15,12 @@
 2. database 为数据库建表脚本文件夹
 3. frontend 为前端文件夹
 
+## 技术栈
+
+1. 数据库使用 MySQL
+2. 后端使用 Flask 的后端框架 + SqlAlchemy 的 ORM 工具
+3. 前端使用 Vue 的前端框架 + vuex 状态管理 + vuetify 的 UI 组件库 + vite 构建工具 + axios 网络请求库 + echarts 可视化图表库
+
 ## 运行步骤
 
 1. 数据库建立

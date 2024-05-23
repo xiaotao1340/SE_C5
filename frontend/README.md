@@ -80,3 +80,7 @@ See [Configuration Reference](https://vitejs.dev/config/).
 8. src/plugins/ 注册插件，如当前使用的 UI 组件库 Vuetify
 9. src/layouts/ 是 vite 搭建框架以后的默认页面，可以不用管，作为参考
 10. src/assets/ 放置使用的图片
+
+### 开发提示
+
+如果在开发时想看其他已登录才可查看的页面预览，可以修改 src/router/index.js ，注释部分代码，即可成功进入 URL 对应页面

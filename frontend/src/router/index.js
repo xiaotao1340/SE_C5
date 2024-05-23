@@ -46,6 +46,7 @@ const router = createRouter({
   routes,
 })
 
+// TODO: 若开发时需要查看 /user/* 页面，可以注释下方代码
 router.beforeEach((to, from, next) => {
   if (to.path.includes("/user")) { // 若访问路径为 /user/* 则需检查是否有 token (是否已登录)
       if (sessionStorage.getItem("token")) {

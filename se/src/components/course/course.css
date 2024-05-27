@@ -1,0 +1,80 @@
+.title-box {/*课程管理这一行*/
+    width: 81vw;
+    height: 10vh;
+    display: flex;
+    font-size: calc(10px + 2vmin);
+    align-items: center;
+    justify-content: start;
+    background:white;
+    border: none;
+  }
+  
+.seek-box {/*课程管理这一行*/
+    width: 81vw;
+    height: 20vh;
+    display: flex;
+    font-size: calc(10px + 2vmin);
+    align-items: center;
+    justify-content: center;
+    background:white;
+    border: none;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    margin-left: 2vw;
+  }
+  
+.index-box {/*课程编号这一行*/
+    width: 81vw;
+    height: 8vh;
+    display: flex;
+    font-size: calc(3vmin);
+    align-items: center;
+    justify-content: center;
+    background:white;
+    border: none;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    margin-left: 2vw;
+}
+  
+.content-box {/*具体课程这一行*/
+    width: 81vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    font-size: calc(3vmin);
+    align-items: center;
+    justify-content: center;
+    background:rgb(224, 228, 233);
+    border: none;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    margin-left: 2vw; 
+
+}
+
+.space {/*空白占位符*/
+    display: inline-block;
+    margin-left: 8vw; /* 或者使用 padding-left */
+  }
+
+.space-long {/*空白占位符*/
+    display: inline-block;
+    margin-left: 12vw; /* 或者使用 padding-left */
+}
+  
+.space-all {/*空白占位符*/
+    display: inline-block;
+    margin-left: 67vw; /* 或者使用 padding-left */
+}
+
+.box {
+    width: 5vw;
+    height: 5vh;
+    background:pink;
+    border: 1px solid black;
+}
+

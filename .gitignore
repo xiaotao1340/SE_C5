@@ -1,3 +1,4 @@
 frontend_old/
 frontend_ref/
 *.zip
+__pycache__/

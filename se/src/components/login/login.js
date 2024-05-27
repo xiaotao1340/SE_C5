@@ -1,91 +1,76 @@
-import {Space, Input} from 'antd'
-import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import {Space, Input, Card, Typography,} from 'antd'
+import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone,  LockOutlined} from '@ant-design/icons';
 import {LoginComponent} from '../request.js'
-
+import { Link } from 'react-router-dom'
 export let account = '', psword =  '';
 
+export function Login() {  
+    return (  
+         
+        <div style={{backgroundImage: `url('https://ts1.cn.mm.bing.net/th/id/R-C.045eda7192510a0bdb0ccbbdf2318274?rik=%2f0G3D8VggGbErA&riu=http%3a%2f%2fimg.pconline.com.cn%2fimages%2fupload%2fupc%2ftx%2fitbbs%2f1406%2f21%2fc3%2f35505173_1403313298477.jpg&ehk=H%2b0Ab5pVqt1cc8le0Gv5Pi%2b67dIkqazAJF11QOI15f0%3d&risl=&pid=ImgRaw&r=0')`, 
+                    backgroundSize: 'cover', 
+                    height: '100vh' }}>  
+                <br />
+                <br />
+                <Typography.Title level={4} 
+                style={{color: 'white', 
+                        marginLeft:'15vw',
+                        marginTop: '20px' }}>浙江大学选课系统
+                        </Typography.Title>  
+                <br />
 
-export function Login(){
-    return (
-        <div >
-            <Space
-            style={{
-            width:'90vw', 
-            height:'78vh', 
-            background:"white",
-            marginLeft:'4vw',
-            marginRight:'4vw',
-            marginTop:'9vh',
-            marginBottom:'9vh',
-            borderRadius:'5vh'
-            }}
-            size={0}
-            wrap
-            >
-
-                <Space
-                style={{
-                width:'90vw', 
-                height:'10vh'
-                }}>
-                    <span style={{
-                    fontSize: '5vh',
-                    color: 'lightblue',
-                    marginLeft:'10vw'}}>浙江大学教务管理系统</span>
-                </Space>
-
-                <Space
-                style={{
-                width:'90vw', 
-                height:'60vh'
-                }}>
-                    <Space
-                    style={{
-                    width:'25vw', 
-                    height:'50vh', 
-                    background:"red",
-                    marginLeft:'10vw',
-                    marginBottom:'10vh',
-                    backgroundColor:'#E9EFF7',
-                    borderRadius:'2vh'}}
-                    align='center'
-                    direction='vertical'
-                    >
-
-                    <span>登录界面</span>
-
-                    <span>WELCOME!</span>
-
+                <div style={{ 
+                flexDirection: 'column', 
+                justifyContent: 'center', 
+                padding: 20, 
+                height: '45vh',
+                background: 'grey', 
+                borderRadius: '2vh',
+                marginLeft:'10vw',
+                marginRight:'62vw' }}>  
+                    
+                    <div style={{color: 'white',marginLeft:'4vw',marginTop:'2vh',marginBottom:'2vh' }}>  
+                        <span>统一身份认证登录</span>
+                    </div> 
                     <Input 
-                    placeholder="请输入账号" 
+                    placeholder="请输入学号" 
                     prefix={<UserOutlined />}
                     style={{
                     width:'20vw', 
-                    height:'6vh'}}
+                    height:'6vh',
+                    marginTop: '10px'}}
                     onChange={function(event){
                         account = event.target.value;
                         console.log('account msg:' + account);
                     }}>
-
                     </Input>
+
                     <Input.Password 
                     placeholder="请输入密码" 
-                    prefix={<UserOutlined />}
+                    prefix={<LockOutlined />}
                     iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                     style={{
                     width:'20vw', 
-                    height:'6vh'}}
+                    height:'6vh',
+                    marginTop: '10px',
+                    marginBottom: '15px'}}
                     onChange={function(event){
                         psword = event.target.value;
                         console.log('psword msg:' + psword);
                     }}
                     >
-                        
                     </Input.Password>
+                    
                     <LoginComponent/>
-                    </Space>
-                </Space>
-            </Space>
-        </div>
-    );
+                    <Space>  
+                        <br />
+                        <Link to="/register" style={{ color: 'lightblue', textDecoration: 'none', fontSize: '3vh', marginLeft:'4vw'}}>  
+                            还未注册？立即注册 
+                            <span style={{ marginLeft: '5px', marginTop: '10px'}}></span>  
+                        </Link>  
+                    </Space>  
+                </div>  
+            </div>   
+        
+    );  
 }

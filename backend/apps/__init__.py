@@ -20,6 +20,5 @@ def create_app():
     # 注册蓝图
     my_app.register_blueprint(user_blue)
     my_app.register_blueprint(other_blue)
-    # TODO
     
     return my_app

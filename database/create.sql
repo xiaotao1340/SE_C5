@@ -1,3 +1,7 @@
+create database EDU;
+
+use EDU;
+
 CREATE TABLE Users (
     user_id INT PRIMARY KEY
 );
@@ -6,7 +10,7 @@ CREATE TABLE Accounts (
     user_id INT PRIMARY KEY,
     name CHAR(50) NOT NULL,
     identity ENUM('student', 'teacher', 'administrator'),
-    password VARCHAR(100)
+    password VARCHAR(100),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -92,6 +96,22 @@ CREATE TABLE Grades (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
 );
 
+CREATE TABLE Comment_tags (
+    tag_id INT NOT NULL,
+    tag VARCHAR(100),
+    PRIMARY KEY (tag_id)
+);
+
+CREATE TABLE Evaluation (
+    evaluation_id INT,
+    teacher_id INT,
+    score1 INT,
+    score2 INT,
+    overall_score INT NOT NULL,
+    PRIMARY KEY (evaluation_id),
+    FOREIGN KEY (teacher_id) REFERENCES Teachers(teacher_id)
+);
+
 CREATE TABLE Comments (
     comment_id INT,
     user_id INT,
@@ -112,22 +132,6 @@ CREATE TABLE Comments (
     FOREIGN KEY (upvote_user_id) REFERENCES Users(user_id),
     FOREIGN KEY (downvote_user_id) REFERENCES Users(user_id),
     FOREIGN KEY (evaluation_id) REFERENCES Evaluation(evaluation_id)
-);
-
-CREATE TABLE Comment_tags (
-    tag_id INT NOT NULL,
-    tag VARCHAR(100),
-    PRIMARY KEY (tag_id)
-);
-
-CREATE TABLE Evaluation (
-    evaluation_id INT,
-    teacher_id INT,
-    score1 INT,
-    score2 INT,
-    overall_score INT NOT NULL,
-    PRIMARY KEY (evaluation_id),
-    FOREIGN KEY (teacher_id) REFERENCES Teachers(teacher_id)
 );
 
 CREATE TABLE High_quality_commentators (

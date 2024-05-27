@@ -30,7 +30,7 @@
    * 执行 ./database/create.sql 脚本
 2. 后端启动
    * `cd backend` 进入后端文件夹
-   * 根据需要修改 config.py 中连接数据库的用户名和密码
+   * 根据需要修改 config.py 中连接数据库的用户名和密码（否则可能连不上数据库！）
    * 执行命令 `conda create --name bs_flask python=3.10.13` 此处 python 版本可根据需要替换
    * 重启终端后执行命令 `conda activate bs_flask` 开启虚拟环境
    * 执行命令 `pip3 install -r requirements.txt` 下载所需库

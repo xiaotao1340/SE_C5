@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 export let account = '', psword =  '';
 
 export function Login() {  
+    
     return (  
          
         <div style={{backgroundImage: `url('https://ts1.cn.mm.bing.net/th/id/R-C.045eda7192510a0bdb0ccbbdf2318274?rik=%2f0G3D8VggGbErA&riu=http%3a%2f%2fimg.pconline.com.cn%2fimages%2fupload%2fupc%2ftx%2fitbbs%2f1406%2f21%2fc3%2f35505173_1403313298477.jpg&ehk=H%2b0Ab5pVqt1cc8le0Gv5Pi%2b67dIkqazAJF11QOI15f0%3d&risl=&pid=ImgRaw&r=0')`, 
@@ -42,6 +43,7 @@ export function Login() {
                     onChange={function(event){
                         account = event.target.value;
                         console.log('account msg:' + account);
+                        sessionStorage.setItem('account',account); 
                     }}>
                     </Input>
 
@@ -57,6 +59,7 @@ export function Login() {
                     onChange={function(event){
                         psword = event.target.value;
                         console.log('psword msg:' + psword);
+                        sessionStorage.setItem('psword',psword); 
                     }}
                     >
                     </Input.Password>
@@ -69,6 +72,8 @@ export function Login() {
                             <span style={{ marginLeft: '5px', marginTop: '10px'}}></span>  
                         </Link>  
                     </Space>  
+
+                    
                 </div>  
             </div>   
         

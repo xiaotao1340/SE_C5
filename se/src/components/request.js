@@ -2,28 +2,34 @@ import axios from 'axios'
 import {account, psword} from './login/login.js'
 import { BrowserRouter, Navigate, useNavigate } from 'react-router-dom'
 import { Button } from 'antd';
+// import { postapi } from "./utils/http.js";
 import {SearchOutlined} from '@ant-design/icons';
+axios.defaults.baseURL = 'http://localhost:3000/api/'
 
-axios.defaults.baseURL = 'http://127.0.0.1:3000'
- 
+
 export function LoginComponent() {
   const navigate = useNavigate();
  
   function loginMsg() {
-    axios.post('/Login', {
-        account : account,
-        psword : psword
-    })
-    .then(res => {
-    console.log(res.data);
-    })
+    axios.post('user/login', {
+      account : account,
+      psword : psword
+  })
+    .then((response)=> {
+      console.log(response.data);
+      alert(response.data.resp);
+      if(response.data.status===0)
+        sessionStorage.setItem('token',response.data.token); 
+      navigate('/home'); 
+    }  
+    )
     .catch(err => {
-    console.error(err);
-    });
-    if(1)//需要login判断
-    {
-        navigate('/home');
-    }
+      console.log(err);
+      console.error(err);
+      alert('登录失败，请检查您的用户名和密码是否正确，或者稍后重试。'); // 给用户一些反馈  
+
+    })
+    //navigate('/home'); 
   }
  
   return (
@@ -48,15 +54,13 @@ export function SeekCourseComponent(){
         psword : psword
     })
     .then(res => {
-    console.log(res.data);
+      console.log(res.data);
+
     })
     .catch(err => {
     console.error(err);
     });
-    if(1)//需要判断
-    {
-        ;
-    }
+
   }
  
     return (

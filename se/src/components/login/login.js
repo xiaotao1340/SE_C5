@@ -2,6 +2,7 @@ import {Space, Input, Card, Typography,} from 'antd'
 import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone,  LockOutlined} from '@ant-design/icons';
 import {LoginComponent} from '../request.js'
 import { Link } from 'react-router-dom'
+import UserCategorySelector from '../select/select.js';
 export let account = '', psword =  '';
 
 export function Login() {  
@@ -15,7 +16,7 @@ export function Login() {
                 <br />
                 <Typography.Title level={4} 
                 style={{color: 'white', 
-                        marginLeft:'15vw',
+                        marginLeft:'39.5vw',
                         marginTop: '20px' }}>浙江大学选课系统
                         </Typography.Title>  
                 <br />
@@ -27,12 +28,15 @@ export function Login() {
                 height: '45vh',
                 background: 'grey', 
                 borderRadius: '2vh',
-                marginLeft:'10vw',
-                marginRight:'62vw' }}>  
+                marginLeft:'35vw',
+                marginRight:'38vw' }}>  
                     
                     <div style={{color: 'white',marginLeft:'4vw',marginTop:'2vh',marginBottom:'2vh' }}>  
                         <span>统一身份认证登录</span>
                     </div> 
+                    <div style={{color: 'black', fontSize: '3vh', marginTop:'2vh',marginBottom:'1vh' }}>  
+                    <UserCategorySelector />
+                    </div>
                     <Input 
                     placeholder="请输入学号" 
                     prefix={<UserOutlined />}

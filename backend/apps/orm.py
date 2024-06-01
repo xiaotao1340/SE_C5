@@ -1,3 +1,4 @@
+from xmlrpc.client import Boolean
 from sqlalchemy import Column, Integer, String, Enum, Date, DateTime, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -8,6 +9,8 @@ class User(Base):
     __tablename__ = 'Users'
 
     user_id = Column(Integer, primary_key=True)
+    identity = Column(Enum('student', 'teacher', 'administrator'))
+    is_HighQualityCommentator = Column(Integer, default=0)
 
 class Account(Base):
     __tablename__ = 'Accounts'
@@ -47,13 +50,15 @@ class Administrator(Base):
     __tablename__ = 'Administrators'
 
     administrator_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
-
+    is_highest_admin = Column(Integer, default=0)
+    
     user = relationship(User)
 
 class Classroom(Base):
     __tablename__ = 'Classrooms'
 
     room_id = Column(Integer, primary_key=True)
+    room_name = Column(String(100), nullable=False)
     capacity = Column(Integer, nullable=False)
 
 class Course(Base):
@@ -74,6 +79,7 @@ class Course(Base):
 
     teacher = relationship(Teacher)
     room = relationship(Classroom)
+
 
 class Schedule(Base):
     __tablename__ = 'Schedules'
@@ -123,8 +129,6 @@ class Comment(Base):
     teacher_id = Column(Integer, ForeignKey('Teachers.teacher_id'))
     comment_time = Column(DateTime)
     tag_id = Column(Integer, ForeignKey('Comment_tags.tag_id'))
-    upvote_user_id = Column(Integer, ForeignKey('Users.user_id'))
-    downvote_user_id = Column(Integer, ForeignKey('Users.user_id'))
     teacher_response = Column(Text)
     comment_quality = Column(Integer)
     evaluation_id = Column(Integer, ForeignKey('Evaluation.evaluation_id'))
@@ -133,8 +137,6 @@ class Comment(Base):
     course = relationship(Course)
     teacher = relationship(Teacher)
     tag = relationship('CommentTag')
-    upvote_user = relationship(User, foreign_keys=[upvote_user_id])
-    downvote_user = relationship(User, foreign_keys=[downvote_user_id])
     evaluation = relationship('Evaluation')
 
 class CommentTag(Base):
@@ -154,12 +156,20 @@ class Evaluation(Base):
 
     teacher = relationship(Teacher)
 
-class HighQualityCommentator(Base):
-    __tablename__ = 'High_quality_commentators'
+class UpvoteUser(Base):
+    __tablename__ = 'Upvote_users'
 
-    hqc_id = Column(Integer, primary_key=True)
-    comment_id = Column(Integer, ForeignKey('Comments.comment_id'))
+    comment_id = Column(Integer, ForeignKey('Comments.comment_id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
 
-    user = relationship(User, foreign_keys=[hqc_id])
     comment = relationship(Comment)
+    user = relationship(User)
 
+class DownvoteUser(Base):
+    __tablename__ = 'Downvote_users'
+
+    comment_id = Column(Integer, ForeignKey('Comments.comment_id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
+
+    comment = relationship(Comment)
+    user = relationship(User)

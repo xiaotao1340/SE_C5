@@ -3,7 +3,9 @@ create database EDU;
 use EDU;
 
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY
+    user_id INT PRIMARY KEY,
+    identity ENUM('student', 'teacher', 'administrator'),
+    is_HighQualityCommentator INT DEFAULT 0
 );
 
 CREATE TABLE Accounts (
@@ -119,8 +121,6 @@ CREATE TABLE Comments (
     teacher_id INT,
     comment_time DATETIME,
     tag_id INT,
-    upvote_user_id INT,
-    downvote_user_id INT,
     teacher_response TEXT,
     comment_quality INT,
     evaluation_id INT,
@@ -129,14 +129,21 @@ CREATE TABLE Comments (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id),
     FOREIGN KEY (teacher_id) REFERENCES Teachers(teacher_id),
     FOREIGN KEY (tag_id) REFERENCES Comment_tags(tag_id),
-    FOREIGN KEY (upvote_user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (downvote_user_id) REFERENCES Users(user_id),
     FOREIGN KEY (evaluation_id) REFERENCES Evaluation(evaluation_id)
 );
 
-CREATE TABLE High_quality_commentators (
-    HQC_id INT PRIMARY KEY,
-    comment_id INT NOT NULL,
-    FOREIGN KEY (HQC_id) REFERENCES Users(user_id),
-    FOREIGN KEY (comment_id) REFERENCES Comments(comment_id)
+CREATE TABLE Upvote_users (
+    comment_id INT,
+    user_id INT,
+    PRIMARY KEY (comment_id, user_id),
+    FOREIGN KEY (comment_id) REFERENCES Comments(comment_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Downvote_users (
+    comment_id INT,
+    user_id INT,
+    PRIMARY KEY (comment_id, user_id),
+    FOREIGN KEY (comment_id) REFERENCES Comments(comment_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );

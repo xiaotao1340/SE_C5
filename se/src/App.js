@@ -3,6 +3,7 @@ import { Sidenav, pep } from './components/sidenav/sidenav.js'
 import { Menu, Space} from 'antd'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Login, account, psword} from './components/login/login.js'
+import { Register } from './components/register/register.js'
 import { Home } from './components/home/home.js';
 import { Byelection } from './components/byelection/byelection.js';
 import { Course } from './components/course/course.js';
@@ -26,6 +27,7 @@ export class App extends PureComponent {
       <div>
         <Routes>
           <Route exact path="/" element={<Login/>}></Route>
+          <Route path="/register" element={<Register/>}></Route>
           <Route path="/home" element={<Space className='content'><Sidenav></Sidenav><Home/></Space>}></Route>
           <Route path="/course" element={<Space className='content'><Sidenav></Sidenav><Course/></Space>}></Route>
           <Route path="/by-elect" element={<Space className='content'><Sidenav></Sidenav><Byelection/></Space>}></Route>

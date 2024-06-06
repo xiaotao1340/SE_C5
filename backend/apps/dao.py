@@ -6,6 +6,8 @@ from orm import CourseSelection, CourseByelection, Grade, Comment, CommentTag, E
 from enum import Enum
 from sqlalchemy.exc import IntegrityError
 
+from datetime import datetime
+
 # TODO: need to create session in create_app() 需将与数据库的连接建立放在 create_app() 中实现
 db_user = ''
 db_password = ''
@@ -36,10 +38,10 @@ Session = sessionmaker(bind=engine)
 
 # 创建最高权限管理员
 with Session() as session:
-    if not session.query(Administrator).first():
+    if not session.query(Administrator):
         session = Session()
         new_user = User(identity = 'administrator')
-        new_admin = Administrator(administrator_id=new_user.user_id, user=new_user, is_highest_admin=1)
+        new_admin = Administrator(administrator_id=new_user.user_id, user=new_user)
         session.add(new_admin)
 
 

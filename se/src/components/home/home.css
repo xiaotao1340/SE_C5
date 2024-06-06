@@ -1,0 +1,18 @@
+.profile-container { /* 对应 ProfileContainer 组件 */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .profile-item { /* 单个信息项 */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .profile-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }

@@ -133,6 +133,23 @@ def delete_student(student_id):
             return "用户不存在"
         return "删除成功"
 
+# 获取学生信息
+def get_info_student(student_id):
+    with Session() as session:
+        student = session.query(Student).get(student_id)
+        if student:
+            birthday_str = datetime.strftime(student.birthday, '%Y-%m-%d')
+            return {
+                'id': student.student_id,
+                'name': student.name,
+                'gender': student.gender,
+                'birthday': birthday_str,
+                'contact': student.contact_information,
+                'department': student.department
+            }
+        else:
+            return None
+
 # 更新学生用户的信息
 # update_student_info(学号（需要更新的对象）、更新信息（支持部分更新）...) -> 更新成功或失败原因
 def update_student_info(student_id, name=None, gender=None, 
@@ -183,6 +200,23 @@ def delete_teacher(teacher_id):
         else:
             return "用户不存在"
         return "删除成功"
+
+# 获取教师信息
+def get_info_teacher(teacher_id):
+    with Session() as session:
+        teacher = session.query(Teacher).get(teacher_id)
+        if teacher:
+            birthday_str = datetime.strftime(teacher.birthday, '%Y-%m-%d')
+            return {
+                'id': teacher.teacher_id,
+                'name': teacher.name,
+                'gender': teacher.gender,
+                'birthday': birthday_str,
+                'contact': teacher.contact_information,
+                'department': teacher.department
+            }
+        else:
+            return None
 
 # 更新教师用户的信息
 # update_teacher_info(学号（需要更新的对象）、更新信息（支持部分更新）...) -> 更新成功或失败原因

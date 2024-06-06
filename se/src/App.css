@@ -1,8 +1,13 @@
-.content {/*具体课程这一行*/
+body, html, #root, .App {
+    height: 100%;
+    margin: 0;
     display: flex;
-    flex-direction:row;
-    align-items:flex-start;
-    justify-content:flex-start;
-    border: none;
-    size:0vw;
+    flex-direction: column;
   }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+    background: #f0f2f5;
+  }
+  

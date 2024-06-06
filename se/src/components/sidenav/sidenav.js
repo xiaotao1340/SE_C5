@@ -9,9 +9,8 @@ export function Sidenav() {
 
 
         <Menu
-        style={{ width: '15vw', height: '97vh' }}
         defaultSelectedKeys={['1']}
-        mode="inline">
+        mode="horizontal">
             <Menu.Item key={'1'}>
                 <Link to="/home">首页</Link>
             </Menu.Item>

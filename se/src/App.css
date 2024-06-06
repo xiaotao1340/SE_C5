@@ -1,13 +1,28 @@
+.sidenav {
+  width: 100%; /* 设置宽度为100% */
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* 设置菜单宽度为100% */
+}
+
+.menu .ant-menu-item, .menu .ant-menu-submenu-title {
+  display: flex;
+  align-items: center;
+  margin: 0 40px; /* Add appropriate spacing */
+}
+
 body, html, #root, .App {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .content {
-    flex-grow: 1;
-    padding: 20px;
-    background: #f0f2f5;
-  }
-  
+height: 100%;
+margin: 0;
+display: flex;
+flex-direction: column;
+}
+
+.content {
+flex-grow: 1;
+padding: 20px;
+background: #f0f2f5;
+}

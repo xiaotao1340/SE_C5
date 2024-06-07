@@ -2,17 +2,18 @@ from xmlrpc.client import Boolean
 from sqlalchemy import Column, Integer, String, Enum, Date, DateTime, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from apps import db
 
-Base = declarative_base()
+# Base = declarative_base()
 
-class User(Base):
+class User(db.Model):
     __tablename__ = 'Users'
 
     user_id = Column(Integer, primary_key=True)
     identity = Column(Enum('student', 'teacher', 'administrator'))
     is_HighQualityCommentator = Column(Integer, default=0)
 
-class Account(Base):
+class Account(db.Model):
     __tablename__ = 'Accounts'
 
     user_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
@@ -22,7 +23,7 @@ class Account(Base):
 
     user = relationship(User)
 
-class Student(Base):
+class Student(db.Model):
     __tablename__ = 'Students'
 
     student_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
@@ -34,7 +35,7 @@ class Student(Base):
 
     user = relationship(User)
 
-class Teacher(Base):
+class Teacher(db.Model):
     __tablename__ = 'Teachers'
 
     teacher_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
@@ -46,7 +47,7 @@ class Teacher(Base):
 
     user = relationship(User)
 
-class Administrator(Base):
+class Administrator(db.Model):
     __tablename__ = 'Administrators'
 
     administrator_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
@@ -54,14 +55,14 @@ class Administrator(Base):
     
     user = relationship(User)
 
-class Classroom(Base):
+class Classroom(db.Model):
     __tablename__ = 'Classrooms'
 
     room_id = Column(Integer, primary_key=True)
     room_name = Column(String(100), nullable=False)
     capacity = Column(Integer, nullable=False)
 
-class Course(Base):
+class Course(db.Model):
     __tablename__ = 'Courses'
 
     course_id = Column(Integer, primary_key=True)
@@ -81,7 +82,7 @@ class Course(Base):
     room = relationship(Classroom)
 
 
-class Schedule(Base):
+class Schedule(db.Model):
     __tablename__ = 'Schedules'
 
     user_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
@@ -90,7 +91,7 @@ class Schedule(Base):
     user = relationship(User)
     course = relationship(Course)
 
-class CourseSelection(Base):
+class CourseSelection(db.Model):
     __tablename__ = 'Course_selection'
 
     student_id = Column(Integer, ForeignKey('Students.student_id'), primary_key=True)
@@ -100,7 +101,7 @@ class CourseSelection(Base):
     student = relationship(Student)
     course = relationship(Course)
 
-class CourseByelection(Base):
+class CourseByelection(db.Model):
     __tablename__ = 'Course_byelection'
 
     student_id = Column(Integer, ForeignKey('Students.student_id'), primary_key=True)
@@ -110,7 +111,7 @@ class CourseByelection(Base):
     student = relationship(Student)
     course = relationship(Course)
 
-class Grade(Base):
+class Grade(db.Model):
     __tablename__ = 'Grades'
 
     student_id = Column(Integer, ForeignKey('Students.student_id'), primary_key=True)
@@ -120,7 +121,7 @@ class Grade(Base):
     student = relationship(Student)
     course = relationship(Course)
 
-class Comment(Base):
+class Comment(db.Model):
     __tablename__ = 'Comments'
 
     comment_id = Column(Integer, primary_key=True)
@@ -139,13 +140,13 @@ class Comment(Base):
     tag = relationship('CommentTag')
     evaluation = relationship('Evaluation')
 
-class CommentTag(Base):
+class CommentTag(db.Model):
     __tablename__ = 'Comment_tags'
 
     tag_id = Column(Integer, primary_key=True)
     tag = Column(String(100))
 
-class Evaluation(Base):
+class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
 
     evaluation_id = Column(Integer, primary_key=True)
@@ -156,7 +157,7 @@ class Evaluation(Base):
 
     teacher = relationship(Teacher)
 
-class UpvoteUser(Base):
+class UpvoteUser(db.Model):
     __tablename__ = 'Upvote_users'
 
     comment_id = Column(Integer, ForeignKey('Comments.comment_id'), primary_key=True)
@@ -165,7 +166,7 @@ class UpvoteUser(Base):
     comment = relationship(Comment)
     user = relationship(User)
 
-class DownvoteUser(Base):
+class DownvoteUser(db.Model):
     __tablename__ = 'Downvote_users'
 
     comment_id = Column(Integer, ForeignKey('Comments.comment_id'), primary_key=True)

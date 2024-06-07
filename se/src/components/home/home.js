@@ -8,7 +8,7 @@ import './home.css'
 import { UserOutlined } from '@ant-design/icons';
 import { Descriptions } from 'antd';
 import { Sidenav } from '../sidenav/sidenav';
-
+import { postapi, getapi } from '../request';
 
 import { processUser} from '../store/user'
 
@@ -135,6 +135,29 @@ const columns = [
  
 
 export function Home(){
+
+  function get_info() {
+    postapi("user_info", {user_id: 1}) // TODO
+    .then( (response) => {
+      if (response.data.status === 0) {
+        user_info = response.data
+        user_type = response.data.identity
+      }
+      else {
+        alert('获取用户信息失败')
+      }
+    })
+    .catch( (error) => {
+      console.log(error)
+      alert('获取用户信息失败')
+    });
+  }
+
+  useEffect(() => {
+    // 在组件渲染时自动调用这个函数
+    get_info();
+  });
+
     const { token } = theme.useToken();
     const wrapperStyle = {
       width: 350,
@@ -204,7 +227,7 @@ export function Home(){
 		},
 	  ];
 
-	  const TeaItems = [
+	const TeaItems = [
 		{
 		  key: '1',
 		  label: '教工号',

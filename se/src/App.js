@@ -18,7 +18,7 @@ import {
 
 const App = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/';
+  const isLoginPage = location.pathname === '/' || location.pathname === '/register';
 
   return (
     <div className="app-container">

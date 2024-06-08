@@ -32,26 +32,26 @@ def api_get_user_info():
         }
         return make_response(dict0, 200)
 
-# @user_blue.route('/register', methods=['POST']) # 注册路由，向 /user/register 发送请求则会被此函数捕获
-# def register():
-#     reqData = request.get_json() # 获取请求数据
-#     username = reqData['username']
-#     password = reqData['password']
-#     email = reqData['email']
-#     dict0 = {}
-#     user_list = User.query.all() # 从数据库获取 User 表信息
-#     for it_user in user_list:
-#         if username == it_user.name or email == it_user.email: # 用户名或邮箱重复
-#             dict0["status"] = -1 # 返回错误状态码
-#             dict0["resp"] = "The username or email has already been registered!"
-#             return make_response(dict0, 200)
-#     # 插入新用户
-#     newUser = User(name=username, password=password, email=email)
-#     db.session.add(newUser) # 向数据库插入新数据
-#     db.session.commit() # 执行数据库提交
-#     dict0["status"] = 0
-#     dict0["resp"] = "Register Success!"
-#     return make_response(dict0, 200)
+@user_blue.route('/register', methods=['POST']) # 注册路由，向 /user/register 发送请求则会被此函数捕获
+def register():
+    reqData = request.get_json() # 获取请求数据
+    username = reqData['account']
+    password = reqData['psword']
+    email = reqData['email']
+    identity = reqData['identity']
+    dict0 = {}
+    account_list = Account.query.all() # 从数据库获取 User 表信息
+    for it_account in account_list:
+        if username == it_account.name or email == it_account.email: # 用户名或邮箱重复
+            dict0["status"] = -1 # 返回错误状态码
+            dict0["resp"] = "The username or email has already been registered!"
+            return make_response(dict0, 200)
+    # TODO: new User?
+    user = User(identity=identity)
+    create_account(user.user_id, username, password, email)
+    dict0["status"] = 0
+    dict0["resp"] = "Register Success!"
+    return make_response(dict0, 200)
 
 # @user_blue.route('/login', methods=['POST']) # 登录路由，向 /user/login 发送请求则会被此函数捕获
 # def login():

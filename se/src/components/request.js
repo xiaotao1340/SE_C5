@@ -1,20 +1,25 @@
 import axios from 'axios'
+import CryptoJS from 'crypto-js';
 import {account, psword} from './login/login.js'
-import { regAccount, regPsword, regEmail } from './register/register.js'
+import { regAccount, regPsword, regEmail, regIdentity } from './register/register.js'
 import { BrowserRouter, Navigate, useNavigate } from 'react-router-dom'
 import { Button } from 'antd';
 // import { postapi } from "./utils/http.js";
 import {SearchOutlined} from '@ant-design/icons';
 axios.defaults.baseURL = 'http://localhost:3000/api/'
 
+const hashPassword = (password) => {
+  return CryptoJS.SHA256(password).toString();
+};
 
 export function LoginComponent() {
   const navigate = useNavigate();
  
   function loginMsg() {
+    const hashedPassword = hashPassword(psword); 
     axios.post('user/login', {
       account : account,
-      psword : psword
+      psword : hashedPassword
   })
     .then((response)=> {
       console.log(response.data);
@@ -50,10 +55,12 @@ export function RegisterComponent() {
     const navigate = useNavigate();
 
     function registerMsg() {
+        const hashedPassword = hashPassword(regPsword); 
         axios.post('user/register', {
-                regAccount: regAccount,
-                regPsword: regPsword,
-                regEmail: regEmail
+                account: regAccount,
+                psword: hashedPassword,
+                email: regEmail,
+                identity: regIdentity
             })
             .then((response) => {
                 console.log(response.data);

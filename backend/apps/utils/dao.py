@@ -55,7 +55,7 @@ def create_highest_admin():
 # 创建账号 
 # create_account(学号（工号）、用户名、密码) -> 操作成功或失败原因
 # to do: limit for building an account of administrator
-def create_account(user_id, name, password):
+def create_account(user_id, name, password, email):
     existing_account = Account.query.filter_by(user_id=user_id).first()
     if existing_account:
         return "用户已经拥有账号"
@@ -67,11 +67,11 @@ def create_account(user_id, name, password):
     identity = user.identity
 
     if identity == 'student':
-        account = Account(user_id=user_id, name=name, identity='student', password=password)
+        account = Account(user_id=user_id, name=name, identity='student', password=password, email=email)
     elif identity == 'teacher':
-        account = Account(user_id=user_id, name=name, identity='teacher', password=password)
+        account = Account(user_id=user_id, name=name, identity='teacher', password=password, email=email)
     elif identity == 'administrator':
-        account = Account(user_id=user_id, name=name, identity='administrator', password=password)
+        account = Account(user_id=user_id, name=name, identity='administrator', password=password, email=email)
     else:
         raise ValueError("无效的身份信息")
 
@@ -91,7 +91,8 @@ def get_info_of_account(user_id):
         return {
             "name": account.name,
             "identity": account.identity,
-            "password": account.password
+            "password": account.password,
+            "email": account.email
         }
     else:
         return "未找到该用户的账号"

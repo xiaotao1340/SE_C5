@@ -20,6 +20,7 @@ class Account(db.Model):
     name = Column(String(50), nullable=False)
     identity = Column(Enum('student', 'teacher', 'administrator'))
     password = Column(String(100))
+    email = Column(String(50))
 
     user = relationship(User)
 

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';  
   
-function UserCategorySelector() {
+function UserCategorySelector(props) {
   const [selectedCategory, setSelectedCategory] = useState('');  
   
   const handleCategoryChange = (event) => {  
     setSelectedCategory(event.target.value);  
+    props.onCategoryChange(event.target.value);
   };
   
   return (  

@@ -13,6 +13,7 @@ CREATE TABLE Accounts (
     name CHAR(50) NOT NULL,
     identity ENUM('student', 'teacher', 'administrator'),
     password VARCHAR(100),
+    email VARCHAR(50),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 

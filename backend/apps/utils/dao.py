@@ -44,7 +44,8 @@ def create_highest_admin():
         new_admin = Administrator(administrator_id=new_user.user_id, user=new_user, is_highest_admin=1)
         db.session.add(new_admin)
         db.session.commit()
-        print("hr")
+        ret = create_account(new_user.user_id, "admin", "123456")
+        print(ret)
 
 
 ##### 请注意【账号】与【用户】的区别:【用户】是更底层的内容 #####
@@ -66,11 +67,11 @@ def create_account(user_id, name, password):
     identity = user.identity
 
     if identity == 'student':
-        account = Account(user_id=user_id, name=name, identity='student', password=password, user=Student())
+        account = Account(user_id=user_id, name=name, identity='student', password=password)
     elif identity == 'teacher':
-        account = Account(user_id=user_id, name=name, identity='teacher', password=password, user=Teacher())
+        account = Account(user_id=user_id, name=name, identity='teacher', password=password)
     elif identity == 'administrator':
-        account = Account(user_id=user_id, name=name, identity='administrator', password=password, user=Administrator())
+        account = Account(user_id=user_id, name=name, identity='administrator', password=password)
     else:
         raise ValueError("无效的身份信息")
 

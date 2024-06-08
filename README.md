@@ -27,7 +27,8 @@
 
 1. 数据库建立
    * 在 MySQL Workbench 8.0 CE 中根据需要使用密码登录用户，需要在后续修改 ./backend/config.py 中用户名密码的相关配置
-   * 执行 ./database/create.sql 脚本（**目前可不执行，只需执行“create database EDU;”**）
+   <!-- * 执行 ./database/create.sql 脚本（**目前可不执行，只需执行“create database EDU;”**） -->
+   * 执行 ./database/initial.sql 脚本
 2. 后端启动
    * `cd backend` 进入后端文件夹
    * 根据需要修改 config.py 中连接数据库的用户名和密码（否则可能连不上数据库！）

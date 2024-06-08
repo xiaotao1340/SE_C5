@@ -1,10 +1,56 @@
 import React, {useState}  from 'react';
-import {  Input, Typography, } from 'antd';
-import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone, LockOutlined } from '@ant-design/icons';
+import {  Input, Typography, Space, Button} from 'antd';
+import { MailOutlined, UserOutlined, EyeInvisibleOutlined, EyeTwoTone, LockOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom'
+import CryptoJS from 'crypto-js';
+import { BrowserRouter, Navigate, useNavigate } from 'react-router-dom'
 import UserCategorySelector from '../select/select.js';
-import { RegisterComponent } from '../request';
-export let regAccount = '', regPsword =  '', regEmail = '', regIdentity = ' ';
+import { postapi } from '../request.js';
+// import { RegisterComponent } from '../request';
+export let regAccount = '', regPsword =  '', regEmail = '', regIdentity = 'student';
 
+const hashPassword = (password) => {
+    return CryptoJS.SHA256(password).toString();
+};
+
+function RegisterComponent() {
+    const navigate = useNavigate();
+
+    function registerMsg() {
+        const hashedPassword = hashPassword(regPsword); 
+        postapi('user/register', {
+                account: regAccount,
+                psword: hashedPassword,
+                email: regEmail,
+                identity: regIdentity
+            })
+            .then((response) => {
+                console.log(response.data);
+                alert(response.data.resp);
+                if (response.data.status === 0)
+                    sessionStorage.setItem('token', response.data.token);
+                navigate('/');
+            })
+            .catch(err => {
+                console.log(err);
+                console.error(err);
+                alert('注册失败，请检查您的用户名和邮箱是否正确，或者稍后重试。'); // 给用户一些反馈  
+
+            })
+    }
+
+    return ( 
+    <div>
+      <Button 
+      onClick={registerMsg}
+      type="primary"
+      style={{
+      width:'20vw', 
+      height:'6vh'}}
+      >注册</Button>
+    </div>
+    );
+}
 
 export function Register() {
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -21,82 +67,101 @@ export function Register() {
                     backgroundSize: 'cover', 
             height: '100vh'
         }}>  
-            <br/>
-            <br />
-            <Typography.Title level={4} 
-                style={{color: 'white', 
-                        marginLeft:'39.5vw',
-                        marginTop: '20px' }}>浙江大学选课系统
-            </Typography.Title>  
-            <br />
+            <Space 
+                style={{  
+                    width: '100%',  
+                    background:'rgb(255, 255, 255)'
+                    }}  
+                size={0} 
+                wrap= 'true'
+                >
+                <Typography.Title level={4}
+                style={{  
+                    marginLeft: '2vh'
+                    }}  
+                >浙江大学选课系统</Typography.Title>  
             
-            <div style={{ 
-                flexDirection: 'column', 
-                justifyContent: 'center', 
-                padding: 20, 
-                height: '45vh',
-                background: 'grey', 
-                borderRadius: '2vh',
-                marginLeft:'35vw',
-                marginRight: '38vw'
-                }}>  
-                <div style={{color: 'white',marginLeft:'4vw',marginTop:'2vh',marginBottom:'2vh' }}>  
-                        <span>注册新账户</span>
-                </div> 
-                <div style={{color: 'black', fontSize: '3vh', marginTop:'2vh',marginBottom:'1vh' }}>  
-                <UserCategorySelector onCategoryChange={handleCategoryChange} />
-                </div>
-                      
-                <Input 
-                        placeholder="请输入邮箱" 
-                        prefix={<UserOutlined />}
-                        style={{
-                        width:'20vw', 
-                        height:'6vh',
-                        marginTop: '10px'
-                        }}
-                        onChange={function(event){
-                            regEmail = event.target.value;
-                            console.log('regEmail msg:' + regEmail);
-                            sessionStorage.setItem('regEmail',regEmail); 
-                        }}>
-                </Input>
-                
-                <Input 
-                    placeholder="请输入学号" 
-                    prefix={<UserOutlined />}
-                    style={{
-                    width:'20vw', 
-                    height:'6vh',
-                    marginTop: '10px'}}
-                    onChange={function(event){
-                        regAccount = event.target.value;
-                        console.log('regAccount msg:' + regAccount);
-                        sessionStorage.setItem('regAccount',regAccount); 
-                    }}
-                    >
-                </Input>
+            </Space>
+            <Space 
+                style={{  
+                    display: 'flex',  
+                    flexDirection: 'column', 
+                    alignItems: 'center',  
+                    justifyContent: 'center'
+                }}
+                size={0} 
+                wrap= 'true'>
 
-                        <Input.Password 
-                        placeholder="请输入密码" 
-                        prefix={<LockOutlined />}
-                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                        style={{
-                        width:'20vw', 
-                        height:'6vh',
-                        marginTop: '10px',
-                        marginBottom: '15px'
-                        }
-                        }
-                        onChange={function(event){
-                            regPsword = event.target.value;
-                            console.log('regPsword msg:' + regPsword);
-                            sessionStorage.setItem('regPsword',regPsword); 
-                        }}
-                        >
-                </Input.Password>
-                        <RegisterComponent/>
-            </div>
+                <br />
+                <br />
+                <br />
+                {
+                    <Space 
+                    style={{  
+                        width: '120%', 
+                        height: '120%', 
+                        display: 'flex',  
+                        flexDirection: 'column', 
+                        alignItems: 'center',  
+                        justifyContent: 'center',
+                        background:'rgb(224, 228, 233, 0.8)'
+                      }}  
+                    size={0} 
+                    wrap= 'true'
+                    >
+                        <Space style={{ display: 'flex', flexDirection: 'column',width: '100',fontSize:'4vh', marginTop: '2vh'} }  >
+                            <span>注册新账户</span>
+
+                            <div style={{color: 'black', marginTop:'2vh',marginBottom:'1vh' }}>
+                                <UserCategorySelector onCategoryChange={handleCategoryChange} />
+                            </div>
+
+                            <Input
+                            placeholder="请输入邮箱" 
+                            prefix={<MailOutlined />}
+                            style={{width:'20vw'}}
+                            onChange={function(event){
+                                regEmail = event.target.value;
+                                console.log('regEmail msg:' + regEmail);
+                                sessionStorage.setItem('regEmail',regEmail);
+                            }}>
+                            </Input>
+
+                            <Input
+                            placeholder="请输入学号" 
+                            prefix={<UserOutlined />}
+                            style={{width:'20vw'}}
+                            onChange={function(event){
+                                regAccount = event.target.value;
+                                console.log('regAccount msg:' + regAccount);
+                                sessionStorage.setItem('regAccount',regAccount);
+                            }}>
+                            </Input>
+
+                            <Input.Password 
+                            placeholder="请输入密码" 
+                            prefix={<LockOutlined />}
+                            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                            style={{width:'20vw'}}
+                            onChange={function(event){
+                                regPsword = event.target.value;
+                                console.log('regPsword msg:' + regPsword);
+                                sessionStorage.setItem('regPsword',regPsword);
+                            }}
+                            >
+                            </Input.Password>
+                        
+                            <RegisterComponent/>
+                            <Space>  
+                                <Link to="/" style={{ marginBottom: '2vh',color: 'black', textDecoration: 'none', fontSize: '3vh'}}>  
+                                    <span>返回登录 </span>  
+                                </Link>
+                            </Space>
+                        </Space>
+                    </Space>
+                }
+
+            </Space>
         </div>
     );
 }

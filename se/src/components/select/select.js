@@ -1,5 +1,6 @@
 import React, { useState } from 'react';  
-  
+import {Space} from 'antd'
+
 function UserCategorySelector(props) {
   const [selectedCategory, setSelectedCategory] = useState('');  
   
@@ -10,16 +11,17 @@ function UserCategorySelector(props) {
   
   return (  
     <div>  
-      <label>  
-        选择用户类别:  
-        <select value={selectedCategory} onChange={handleCategoryChange}>  
-          <option value="">请选择...</option>  
+      <Space style={{ width: '100',fontSize:'3vh'} }  >
+        <span>用户类别</span>
+        <select value={selectedCategory} 
+        style={{fontSize:'3vh', height: '4vh'}} 
+        onChange={handleCategoryChange}>
           <option value="student">学生</option>  
           <option value="teacher">教师</option>  
           <option value="admin">管理员</option>  
         </select>  
-      </label>  
-    </div>  
+      </Space>
+    </div>
   );  
 }  
   

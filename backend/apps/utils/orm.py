@@ -17,7 +17,7 @@ class Account(db.Model):
     __tablename__ = 'Accounts'
 
     user_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
-    name = Column(String(50), nullable=False)
+    name = Column(String(50), unique=True, nullable=False)
     identity = Column(Enum('student', 'teacher', 'administrator'))
     password = Column(String(100))
     email = Column(String(50))

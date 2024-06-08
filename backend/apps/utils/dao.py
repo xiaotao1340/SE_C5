@@ -44,7 +44,7 @@ def create_highest_admin():
         new_admin = Administrator(administrator_id=new_user.user_id, user=new_user, is_highest_admin=1)
         db.session.add(new_admin)
         db.session.commit()
-        ret = create_account(new_user.user_id, "admin", "123456")
+        ret = create_account(new_user.user_id, "admin", "123456", "123456@zju.edu.cn")
         print(ret)
 
 
@@ -85,8 +85,8 @@ def create_account(user_id, name, password, email):
 
 # 查询账号信息
 # get_info_of_account(学号（工号）) -> [用户名、身份、密码信息]或失败原因
-def get_info_of_account(user_id):
-    account = Account.query.filter_by(user_id=user_id).first()
+def get_info_of_account(name):
+    account = Account.query.filter_by(name=name).first()
     if account:
         return {
             "name": account.name,
@@ -184,7 +184,7 @@ def create_teacher(name, gender=None, birthday=None, contact_information=None, d
     db.session.add(user)
     db.session.add(teacher)
     db.session.commit()
-    teacher_id = teacher.student_id
+    teacher_id = teacher.teacher_id
     return teacher_id
 
 # 删除教师用户
@@ -250,7 +250,7 @@ def create_administrator():
     db.session.add(user)
     db.session.add(administrator)
     db.session.commit()
-    administrator_id = administrator.student_id
+    administrator_id = administrator.administrator_id
     return administrator_id
 
 # 删除管理员用户

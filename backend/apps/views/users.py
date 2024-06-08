@@ -40,17 +40,42 @@ def register():
     email = reqData['email']
     identity = reqData['identity']
     dict0 = {}
-    account_list = Account.query.all() # 从数据库获取 User 表信息
-    for it_account in account_list:
-        if username == it_account.name or email == it_account.email: # 用户名或邮箱重复
-            dict0["status"] = -1 # 返回错误状态码
-            dict0["resp"] = "The username or email has already been registered!"
-            return make_response(dict0, 200)
-    # TODO: new User?
-    user = User(identity=identity)
-    create_account(user.user_id, username, password, email)
-    dict0["status"] = 0
-    dict0["resp"] = "Register Success!"
+    if identity == "student":
+        new_id = create_student(username)
+    elif identity == "teacher":
+        new_id = create_teacher(username)
+    elif identity == "admin":
+        new_id = create_administrator()
+    dict0["resp"] = create_account(new_id, username, password, email)
+    if dict0["resp"] == "账号创建成功":
+        dict0["status"] = 0
+    else:
+        dict0["status"] = -1 # 返回错误状态码
+    return make_response(dict0, 200)
+
+@user_blue.route('/login', methods=['POST']) # 注册路由，向 /user/register 发送请求则会被此函数捕获
+def login():
+    reqData = request.get_json() # 获取请求数据
+    username = reqData['account']
+    password = reqData['psword']
+    identity = reqData['identity']
+    ret = get_info_of_account(username)
+    if type(ret) is dict:
+        flag = (password == ret["password"]) and (identity == ret["identity"])
+        print(flag)
+        print("\n\n\n")
+        if flag:
+            ret["status"] = 0
+            ret["resp"] = "登录成功"
+            return make_response(ret, 200)
+        else:
+            dict0 = {}
+            dict0["status"] = -2 # 返回错误状态码
+            dict0["resp"] = "用户类型或密码错误"
+    else:
+        dict0 = {}
+        dict0["status"] = -1 # 返回错误状态码
+        dict0["resp"] = ret
     return make_response(dict0, 200)
 
 # @user_blue.route('/login', methods=['POST']) # 登录路由，向 /user/login 发送请求则会被此函数捕获

@@ -89,6 +89,7 @@ def get_info_of_account(name):
     account = Account.query.filter_by(name=name).first()
     if account:
         return {
+            "user_id": account.user_id,
             "name": account.name,
             "identity": account.identity,
             "password": account.password,

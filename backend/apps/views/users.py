@@ -12,6 +12,7 @@ user_blue = Blueprint('users', __name__, url_prefix='/user')
 @user_blue.route('/user_info', methods=['POST'])
 def api_get_user_info():
     reqData = request.get_json() # 获取请求数据
+    # current_user_id = get_jwt_identity() # TODO
     user_id = reqData['user_id']
     user_info = get_info_of_account(user_id)
     if user_info != "未找到该用户的账号":
@@ -65,6 +66,8 @@ def login():
         print(flag)
         print("\n\n\n")
         if flag:
+            user_token = create_access_token(identity=ret["user_id"]) # 创建 token(jwt) ，表明已登录状态
+            ret["token"] = user_token
             ret["status"] = 0
             ret["resp"] = "登录成功"
             return make_response(ret, 200)
@@ -77,31 +80,6 @@ def login():
         dict0["status"] = -1 # 返回错误状态码
         dict0["resp"] = ret
     return make_response(dict0, 200)
-
-# @user_blue.route('/login', methods=['POST']) # 登录路由，向 /user/login 发送请求则会被此函数捕获
-# def login():
-#     reqData = request.get_json() # 获取请求数据
-#     username = reqData['username']
-#     password = reqData['password']
-#     dict0 = {}
-#     user_list = User.query.filter(User.name == username).all() # 从数据库获取指定 用户名的 User 表信息
-#     if len(user_list) == 0:
-#         dict0["status"] = -1 # 返回错误状态码
-#         dict0["resp"] = "The user does not exist!"
-#         return make_response(dict0, 200)
-#     if user_list[0].name != username:
-#         dict0["status"] = -2 # 返回错误状态码
-#         dict0["resp"] = "The username is wrong!"
-#         return make_response(dict0, 200)
-#     if user_list[0].password != password:
-#         dict0["status"] = -3 # 返回错误状态码
-#         dict0["resp"] = "The password is wrong!"
-#         return make_response(dict0, 200)
-#     user_token = create_access_token(identity=user_list[0].id) # 创建 token(jwt) ，表明已登录状态
-#     dict0["status"] = 0
-#     dict0["resp"] = "Login Success!"
-#     dict0["token"] = user_token
-#     return make_response(dict0, 200)
 
 # @user_blue.route('/getUserInfo', methods=['GET'])
 # @jwt_required() # 需要请求携带 jwt ，即表明已登录状态

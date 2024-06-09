@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom'
 import UserCategorySelector from '../select/select.js';
 import React, {useState}  from 'react';
 import { postapi } from '../request.js';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { setUsers} from '../store/users.js'
+import {reactLocalStorage} from 'reactjs-localstorage'; 
 
 export let account = '', psword =  '', identity = 'student';
 
@@ -16,6 +19,8 @@ const hashPassword = (password) => {
 
 function LoginComponent() {
     const navigate = useNavigate();
+    // const { user, token } = useSelector(state => state.users)
+	// const dispatch = useDispatch()
    
     function loginMsg() {
       const hashedPassword = hashPassword(psword); 
@@ -28,7 +33,16 @@ function LoginComponent() {
         console.log(response.data);
         alert(response.data.resp);
         if(response.data.status === 0){
-          sessionStorage.setItem('token',response.data.token); 
+        //   sessionStorage.setItem('token',response.data.token); 
+        //   setUsers(response.data)
+        //   console.log("here!!!")
+        //   console.log(user)
+        //   console.log(token)
+          reactLocalStorage.setObject('token', response.data.token);
+          reactLocalStorage.setObject('username', response.data.name)
+          console.log("here!!!")
+          console.log(reactLocalStorage.getObject('token'))
+          console.log(reactLocalStorage.getObject('username'))
           navigate('/home');
         }
       })

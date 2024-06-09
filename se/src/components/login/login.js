@@ -40,9 +40,7 @@ function LoginComponent() {
         //   console.log(token)
           reactLocalStorage.setObject('token', response.data.token);
           reactLocalStorage.setObject('username', response.data.name)
-          console.log("here!!!")
-          console.log(reactLocalStorage.getObject('token'))
-          console.log(reactLocalStorage.getObject('username'))
+          reactLocalStorage.setObject('identity', response.data.identity)
           navigate('/home');
         }
       })

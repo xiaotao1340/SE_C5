@@ -9,7 +9,6 @@ import { Descriptions } from 'antd';
 import { Sidenav } from '../sidenav/sidenav';
 import { postapi, getapi } from '../request';
 
-
 // 测试用account，调用processUser获取信息
 // const account = '1234';
 // // processUser(account);
@@ -151,7 +150,6 @@ const data = [
 
   },
 ];
-const account = localStorage.getItem('account');
 
 
 
@@ -161,14 +159,17 @@ export function Home(){
   const [user_type, setUserType] = useState(null);
   const [Items, setItems] = useState([]);
   const [title1, setTitle1] = useState(null);
+  const [account, setAccount] = useState(0)
 
   function get_info() {
-    postapi("user/api_get_user_info", {user_id: account}) // TODO
+    getapi('user/api_get_user_info')
     .then( (response) => {
+      console.log(response.data.status)
       if (response.data.status === 0) {
         console.log(response.data);
         setUserInfo(response.data);
         setUserType(response.data.identity);
+        setAccount(response.data.name)
       }
       else {
         alert('获取用户信息失败')
@@ -301,7 +302,7 @@ export function Home(){
 
             <div >
               {user_info ? (
-                <Card title="个人信息" style={{width:'70%',height:'30%',marginLeft:'4%',marginTop:'5%'}}>
+                <Card title="个人信息" style={{width:'90%',height:'30%',marginLeft:'4%',marginTop:'5%'}}>
                    <Space align="start" className='home-top-box'>
                      <Meta
                        style={{marginTop:'5%'}}

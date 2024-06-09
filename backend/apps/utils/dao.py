@@ -98,6 +98,19 @@ def get_info_of_account(name):
     else:
         return "未找到该用户的账号"
 
+def get_info_of_account_by_id(user_id):
+    account = Account.query.filter_by(user_id=user_id).first()
+    if account:
+        return {
+            "user_id": account.user_id,
+            "name": account.name,
+            "identity": account.identity,
+            "password": account.password,
+            "email": account.email
+        }
+    else:
+        return "未找到该用户的账号"
+
 # 删除账号
 # delete_account(学号（工号）) -> 操作成功或失败原因
 def delete_account(user_id):

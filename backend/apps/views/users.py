@@ -8,8 +8,8 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 user_blue = Blueprint('users', __name__, url_prefix='/user')
 
 # 获取用户信息
-# @jwt_required() # 需要请求携带 jwt ，即表明已登录状态 # TODO: debug 的时候可以先不用 jwt
-@user_blue.route('/user_info', methods=['POST'])
+@jwt_required() # 需要请求携带 jwt ，即表明已登录状态 # TODO: debug 的时候可以先不用 jwt
+@user_blue.route('/api_get_user_info', methods=['POST'])
 def api_get_user_info():
     reqData = request.get_json() # 获取请求数据
     # current_user_id = get_jwt_identity() # TODO
@@ -22,7 +22,9 @@ def api_get_user_info():
         elif user_info["identity"] == "teacher":
             user_info = get_info_teacher(user_id)
             user_info["status"] = 0
-        else :
+        elif user_info["identity"] == "administrator":
+            user_info["status"] = 0
+        else:
             user_info["status"] = -2
             user_info["error"] = "Undefined User Type"
         return make_response(user_info, 200)

@@ -138,10 +138,14 @@ def delete_student(student_id):
 
 # 获取学生信息
 def get_info_student(student_id):
-    student = Student.query.get(student_id)
+    student = Student.query.filter_by(name=student_id).first()
     if student:
-        birthday_str = datetime.strftime(student.birthday, '%Y-%m-%d')
+        if student.birthday:
+            birthday_str = datetime.strftime(student.birthday, '%Y-%m-%d')
+        else:
+            birthday_str = ''
         return {
+            'identity': 'student',
             'id': student.student_id,
             'name': student.name,
             'gender': student.gender,
@@ -203,10 +207,11 @@ def delete_teacher(teacher_id):
 
 # 获取教师信息
 def get_info_teacher(teacher_id):
-    teacher = Teacher.query.get(teacher_id)
+    teacher = Teacher.query.filter_by(name=teacher_id)
     if teacher:
         birthday_str = datetime.strftime(teacher.birthday, '%Y-%m-%d')
         return {
+            'identity': 'teacher',
             'id': teacher.teacher_id,
             'name': teacher.name,
             'gender': teacher.gender,

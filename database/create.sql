@@ -3,7 +3,7 @@ create database EDU;
 use EDU;
 
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY,
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
     identity ENUM('student', 'teacher', 'administrator'),
     is_HighQualityCommentator INT DEFAULT 0
 );

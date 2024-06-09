@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {reactLocalStorage} from 'reactjs-localstorage';
+
 // import CryptoJS from 'crypto-js';
 // import {account, identity, psword} from './login/login.js'
 // import { regAccount, regPsword, regEmail, regIdentity } from './register/register.js'
@@ -123,6 +125,36 @@ const instace = axios.create({
   baseURL: 'http://localhost:3000/api/',
   timeout: 5000, // 超时时间
 });
+
+// 配置请求拦截器，在请求之前的数据处理
+instace.interceptors.request.use(
+  (config) => {
+    // 在请求头统一添加token
+    if (reactLocalStorage.get('token', false)) {
+      const jwtToken = reactLocalStorage.getObject('token')
+      config.headers.Authorization = `Bearer ${jwtToken}`
+    }
+    return config;
+  },
+  (err) => {
+    return Promise.reject(err); // 将错误消息挂到promise的失败函数上
+  }
+);
+
+// 配置响应拦截器
+instace.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (err) => {
+    console.log(err)
+    if (err.response.status === 401) {
+      alert('登录信息过期')
+      reactLocalStorage.clear()
+    }
+    return Promise.reject(err); // 将错误消息挂到promise的失败函数上
+  }
+);
 
 // 封装请求的api
 const callapi = (method = "GET", url, data = {}) => {

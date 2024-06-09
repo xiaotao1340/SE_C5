@@ -65,8 +65,6 @@ def login():
     ret = get_info_of_account(username)
     if type(ret) is dict:
         flag = (password == ret["password"]) and (identity == ret["identity"])
-        print(flag)
-        print("\n\n\n")
         if flag:
             user_token = create_access_token(identity=ret["user_id"]) # 创建 token(jwt) ，表明已登录状态
             ret["token"] = user_token

@@ -44,7 +44,7 @@ def create_highest_admin():
         new_admin = Administrator(administrator_id=new_user.user_id, user=new_user, is_highest_admin=1)
         db.session.add(new_admin)
         db.session.commit()
-        ret = create_account(new_user.user_id, "admin", "123456", "123456@zju.edu.cn")
+        ret = create_account(new_user.user_id, "admin", "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92", "123456@zju.edu.cn")
         print(ret)
 
 

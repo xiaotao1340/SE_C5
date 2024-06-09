@@ -18,7 +18,7 @@ function UserCategorySelector(props) {
         onChange={handleCategoryChange}>
           <option value="student">学生</option>  
           <option value="teacher">教师</option>  
-          <option value="admin">管理员</option>  
+          <option value="administrator">管理员</option>  
         </select>  
       </Space>
     </div>

@@ -8,6 +8,7 @@ import { Course } from './components/course/course.js';
 import { Setinfo } from './components/setinfo/setinfo.js';
 import { Info } from './components/info/info.js';
 import { Eval } from './components/eval/eval.js';
+import {reactLocalStorage} from 'reactjs-localstorage';
 import './App.css';
 
 import {
@@ -18,13 +19,13 @@ import {
 
 const App = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/' || location.pathname === '/register';
+  const isLoginPage = location.pathname === '/' || location.pathname === '/register' || reactLocalStorage.get('identity', false) === false;
 
   return (
     <div className="app-container">
       {!isLoginPage && (
         <div className="menu">
-          <Sidenav />
+          <Sidenav userType={reactLocalStorage.getObject('identity')}/>
         </div>
       )}
       <div className="content">

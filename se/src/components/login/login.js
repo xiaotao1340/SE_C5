@@ -9,7 +9,7 @@ import React, {useState}  from 'react';
 import { postapi } from '../request.js';
 // import { useDispatch, useSelector } from 'react-redux'
 // import { setUsers} from '../store/users.js'
-import {reactLocalStorage} from 'reactjs-localstorage'; 
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 export let account = '', psword =  '', identity = 'student';
 
@@ -23,7 +23,7 @@ function LoginComponent() {
 	// const dispatch = useDispatch()
    
     function loginMsg() {
-      const hashedPassword = hashPassword(psword); 
+      const hashedPassword = hashPassword(psword);
       postapi('user/login', {
         account : account,
         psword : hashedPassword,

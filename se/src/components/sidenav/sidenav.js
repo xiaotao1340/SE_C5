@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
-export function Sidenav({ userType = 'student' }) {
+export function Sidenav({ userType }) {
   const getMenuItems = () => {
     switch (userType) {
       case 'student':
@@ -75,7 +75,7 @@ export function Sidenav({ userType = 'student' }) {
             <Link to="/info">信息通知</Link>
           </Menu.Item>
         ];
-      case 'admin':
+      case 'administrator':
         return [
           <Menu.Item key="1">
             <Link to="/home">首页</Link>

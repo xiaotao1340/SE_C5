@@ -14,7 +14,9 @@ import './App.css';
 import {
   Routes,
   Route,
-  useLocation
+  useLocation,
+  Navigate,
+  Outlet
 } from 'react-router-dom';
 
 const App = () => {
@@ -23,21 +25,28 @@ const App = () => {
 
   return (
     <div className="app-container">
-      {!isLoginPage && (
-        <div className="menu">
-          <Sidenav userType={reactLocalStorage.getObject('identity')}/>
-        </div>
-      )}
       <div className="content">
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/course" element={<Course />} />
-          <Route path="/by-elect" element={<Byelection />} />
-          <Route path="/eval" element={<Eval />} />
-          <Route path="/setinfo" element={<Setinfo />} />
-          <Route path="/info" element={<Info />} />
+          <Route path="/user" element={!isLoginPage && (
+            <div className='app-container'>
+              <div className="menu">
+                <Sidenav userType={reactLocalStorage.getObject('identity')}/>
+              </div>
+              <div className='content'>
+                <Outlet></Outlet>
+              </div>
+            </div>
+          )}>
+            <Route path="home" element={<Home />} />
+            <Route path="course" element={<Course />} />
+            <Route path="by-elect" element={<Byelection />} />
+            <Route path="eval" element={<Eval />} />
+            <Route path="setinfo" element={<Setinfo />} />
+            <Route path="info" element={<Info />} />
+          </Route>
+          <Route path="*" element={<Navigate to ="/user/home" />}/>
         </Routes>
       </div>
     </div>

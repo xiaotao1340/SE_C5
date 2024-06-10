@@ -172,12 +172,12 @@ export function Home(){
         setAccount(response.data.name)
       }
       else {
-        alert('获取用户信息失败')
+        message.info('获取用户信息失败')
       }
     })
     .catch( (error) => {
       console.log(error)
-      alert('获取用户信息失败')
+      message.info('获取用户信息失败')
     });
   }
 

@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import {  Input, Typography, Space, Button} from 'antd';
+import {  Input, Typography, Space, Button, message} from 'antd';
 import { MailOutlined, UserOutlined, EyeInvisibleOutlined, EyeTwoTone, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import CryptoJS from 'crypto-js';
@@ -26,7 +26,7 @@ function RegisterComponent() {
             })
             .then((response) => {
                 console.log(response.data);
-                alert(response.data.resp);
+                message.info(response.data.resp);
                 if (response.data.status === 0)
                     sessionStorage.setItem('token', response.data.token);
                 navigate('/');
@@ -34,7 +34,7 @@ function RegisterComponent() {
             .catch(err => {
                 console.log(err);
                 console.error(err);
-                alert('注册失败，请检查您的用户名和邮箱是否正确，或者稍后重试。'); // 给用户一些反馈  
+                message.info('注册失败，请检查您的用户名和邮箱是否正确，或者稍后重试。'); // 给用户一些反馈  
 
             })
     }

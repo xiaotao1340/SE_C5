@@ -1,4 +1,4 @@
-import {Space, Input, Button, Typography,} from 'antd'
+import {Space, Input, Button, Typography, message,} from 'antd'
 import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone,  LockOutlined} from '@ant-design/icons';
 // import {LoginComponent} from '../request.js'
 import CryptoJS from 'crypto-js';
@@ -31,7 +31,7 @@ function LoginComponent() {
       })
       .then((response)=> {
         console.log(response.data);
-        alert(response.data.resp);
+        message.info(response.data.resp);
         if(response.data.status === 0){
         //   sessionStorage.setItem('token',response.data.token); 
         //   setUsers(response.data)
@@ -41,13 +41,13 @@ function LoginComponent() {
           reactLocalStorage.setObject('token', response.data.token);
           reactLocalStorage.setObject('username', response.data.name)
           reactLocalStorage.setObject('identity', response.data.identity)
-          navigate('/home');
+          navigate('/user/home');
         }
       })
       .catch(err => {
         console.log(err);
         console.error(err);
-        alert('登录失败，请检查您的用户名和密码是否正确，或者稍后重试。'); // 给用户一些反馈  
+        message.info('登录失败，请检查您的用户名和密码是否正确，或者稍后重试。'); // 给用户一些反馈  
       })
     }
    

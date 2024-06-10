@@ -33,11 +33,6 @@ function LoginComponent() {
         console.log(response.data);
         message.info(response.data.resp);
         if(response.data.status === 0){
-        //   sessionStorage.setItem('token',response.data.token); 
-        //   setUsers(response.data)
-        //   console.log("here!!!")
-        //   console.log(user)
-        //   console.log(token)
           reactLocalStorage.setObject('token', response.data.token);
           reactLocalStorage.setObject('username', response.data.name)
           reactLocalStorage.setObject('identity', response.data.identity)
@@ -65,13 +60,8 @@ function LoginComponent() {
 }
 
 export function Login() {  
-    const [selectedCategory, setSelectedCategory] = useState('');
-
     const handleCategoryChange = (id) => {
-        setSelectedCategory(id);
         identity = id;
-        console.log('Selected identity:', identity);
-        sessionStorage.setItem('identity', identity);
     };
 
     return (  
@@ -133,8 +123,6 @@ export function Login() {
                             style={{width:'20vw'}}
                             onChange={function(event){
                                 account = event.target.value;
-                                console.log('account msg:' + account);
-                                sessionStorage.setItem('account',account); 
                             }}>
                             </Input>
 
@@ -145,8 +133,6 @@ export function Login() {
                             style={{width:'20vw'}}
                             onChange={function(event){
                                 psword = event.target.value;
-                                console.log('psword msg:' + psword);
-                                sessionStorage.setItem('psword',psword); 
                             }}
                             >
                             </Input.Password>

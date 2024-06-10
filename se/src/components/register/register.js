@@ -27,9 +27,9 @@ function RegisterComponent() {
             .then((response) => {
                 console.log(response.data);
                 message.info(response.data.resp);
-                if (response.data.status === 0)
-                    sessionStorage.setItem('token', response.data.token);
-                navigate('/');
+                if (response.data.status === 0){
+                  navigate('/');
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -53,13 +53,9 @@ function RegisterComponent() {
 }
 
 export function Register() {
-    const [selectedCategory, setSelectedCategory] = useState('');
 
     const handleCategoryChange = (identity) => {
-        setSelectedCategory(identity);
         regIdentity = identity;
-        console.log('Selected identity:', regIdentity);
-        sessionStorage.setItem('regIdentity', regIdentity);
     };
 
     return (
@@ -122,8 +118,6 @@ export function Register() {
                             style={{width:'20vw'}}
                             onChange={function(event){
                                 regEmail = event.target.value;
-                                console.log('regEmail msg:' + regEmail);
-                                sessionStorage.setItem('regEmail',regEmail);
                             }}>
                             </Input>
 
@@ -133,8 +127,6 @@ export function Register() {
                             style={{width:'20vw'}}
                             onChange={function(event){
                                 regAccount = event.target.value;
-                                console.log('regAccount msg:' + regAccount);
-                                sessionStorage.setItem('regAccount',regAccount);
                             }}>
                             </Input>
 
@@ -145,8 +137,6 @@ export function Register() {
                             style={{width:'20vw'}}
                             onChange={function(event){
                                 regPsword = event.target.value;
-                                console.log('regPsword msg:' + regPsword);
-                                sessionStorage.setItem('regPsword',regPsword);
                             }}
                             >
                             </Input.Password>

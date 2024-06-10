@@ -8,6 +8,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { Descriptions } from 'antd';
 import { Sidenav } from '../sidenav/sidenav';
 import { postapi, getapi } from '../request';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 // 测试用account，调用processUser获取信息
 // const account = '1234';
@@ -151,7 +152,9 @@ const data = [
   },
 ];
 
-
+function LogOUt() {
+  reactLocalStorage.clear()
+}
 
 export function Home(){
 
@@ -291,9 +294,11 @@ export function Home(){
 					          />
                     <div style={{marginLeft: '40vw'}}></div>
 
-                    <Button type="text" style={{fontSize:'2vh', width: '4vw'}}>消息</Button>
+                    <a href="/user/info">
+                      <Button type="text" style={{fontSize:'2vh', width: '4vw'}}>消息</Button>
+                    </a>
 					          <a href="/">
-                      <Button type="text" style={{fontSize:'2vh', width: '4vw'}}>登出</Button>
+                      <Button onClick={LogOUt} type="text" style={{fontSize:'2vh', width: '4vw'}}>登出</Button>
 					          </a>
 				        </Space>
             }

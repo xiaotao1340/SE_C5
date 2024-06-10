@@ -16,7 +16,7 @@ export function Course(){
     return (
         <div>
                 <>  
-                    { 
+                    {/* { 
                         <Space 
                         style={{ width: 'auto' }} 
                         className='course-title-box'
@@ -37,7 +37,7 @@ export function Course(){
                             <Button type="text" style={{ width: '4vw'}}>登出</Button>
 
                         </Space>
-                    }
+                    } */}
 
                     { 
                         <Space 

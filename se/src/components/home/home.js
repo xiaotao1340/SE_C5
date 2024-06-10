@@ -152,9 +152,9 @@ const data = [
   },
 ];
 
-function LogOUt() {
-  reactLocalStorage.clear()
-}
+// function LogOUt() {
+//   reactLocalStorage.clear()
+// }
 
 export function Home(){
 
@@ -194,16 +194,17 @@ export function Home(){
     if(user_info){
     console.log(user_type);
 
-    const items = [
+    const items = (user_type === 'administrator') ? [{key: '1', label: '账号', children: user_info.name}] :
+     [
       {
         key: '1',
         label: (user_type === 'student') ? '学号' : '教工号',
-        children: user_info.id,
+        children: user_info.name,
       },
       {
         key: '2',
         label: '姓名',
-        children: user_info.name,
+        children: user_info.realName,
       },
       {
         key: '3',
@@ -276,7 +277,7 @@ export function Home(){
     return (
     <div >
         <>  
-            { 
+            {/* { 
                 
                 <Space 
                   style={{ width: 'auto' ,marginTop:"3vh", position: 'relative'}} 
@@ -301,7 +302,7 @@ export function Home(){
                       <Button onClick={LogOUt} type="text" style={{fontSize:'2vh', width: '4vw'}}>登出</Button>
 					          </a>
 				        </Space>
-            }
+            } */}
 
             <Space direction="vertical" size="middle" style={{display: 'flex',}}>
 

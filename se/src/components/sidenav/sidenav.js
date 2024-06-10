@@ -1,7 +1,14 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, Space, Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { reactLocalStorage } from 'reactjs-localstorage';
+
+const { Search } = Input;
+
+function LogOUt() {
+  reactLocalStorage.clear()
+}
 
 export function Sidenav({ userType }) {
   const getMenuItems = () => {
@@ -109,14 +116,39 @@ export function Sidenav({ userType }) {
   const pathItem = pathItems[2] ?? '';
 
   return (
-    <div className="sidenav">
-      <Menu
-        className="menu"
-        selectedKeys={[pathItem]}
-        mode="horizontal"
-      >
-        {getMenuItems()}
-      </Menu>
+    <div>
+      <div className="sidenav">
+        <Menu
+          className="menu"
+          selectedKeys={[pathItem]}
+          mode="horizontal"
+        >
+          {getMenuItems()}
+        </Menu>
+      </div>
+      {
+        <Space 
+          style={{ width: 'auto' ,marginTop:"3vh", position: 'relative'}} 
+          className='course-title-box'
+        >
+            <div style={{marginLeft: '0vw', display: 'flex', flexDirection: 'column'}}></div>
+            <Search 
+                placeholder="输入搜索" 
+                allowClear 
+                variant="filled"
+                style={{ width: '20vw'}}
+                size='large'
+            />
+            <div style={{marginLeft: '40vw'}}></div>
+
+            <a href="/user/info">
+              <Button type="text" style={{fontSize:'2vh', width: '4vw'}}>消息</Button>
+            </a>
+            <a href="/">
+              <Button onClick={LogOUt} type="text" style={{fontSize:'2vh', width: '4vw'}}>登出</Button>
+            </a>
+        </Space>
+      }
     </div>
   );
 }

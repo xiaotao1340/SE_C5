@@ -29,6 +29,7 @@ class Student(db.Model):
 
     student_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
     name = Column(String(50), nullable=False)
+    realName = Column(String(30))
     gender = Column(Enum('male', 'female', 'unknown'))
     birthday = Column(Date)
     contact_information = Column(String(100))
@@ -41,6 +42,7 @@ class Teacher(db.Model):
 
     teacher_id = Column(Integer, ForeignKey('Users.user_id'), primary_key=True)
     name = Column(String(50), nullable=False)
+    realName = Column(String(30))
     gender = Column(Enum('male', 'female', 'unknown'))
     birthday = Column(Date)
     contact_information = Column(String(100))

@@ -127,9 +127,9 @@ def delete_account(user_id):
 ########################### 2. Students #############################
 # 创建学生用户
 # create_student(姓名（必要）、性别等（非必要）) -> 新创建的学生id
-def create_student(name, gender=None, birthday=None, contact_information=None, department=None):
+def create_student(name, realName=None, gender=None, birthday=None, contact_information=None, department=None):
     user = User(identity='student')
-    student = Student(name=name, gender=gender, birthday=birthday, contact_information=contact_information, department=department, user=user)
+    student = Student(name=name, realName=realName, gender=gender, birthday=birthday, contact_information=contact_information, department=department, user=user)
     db.session.add(user)
     db.session.add(student)
     db.session.commit()
@@ -151,7 +151,7 @@ def delete_student(student_id):
 
 # 获取学生信息
 def get_info_student(student_id):
-    student = Student.query.filter_by(name=student_id).first()
+    student = Student.query.filter_by(student_id=student_id).first()
     if student:
         if student.birthday:
             birthday_str = datetime.strftime(student.birthday, '%Y-%m-%d')
@@ -161,6 +161,7 @@ def get_info_student(student_id):
             'identity': 'student',
             'id': student.student_id,
             'name': student.name,
+            'realName': student.realName,
             'gender': student.gender,
             'birthday': birthday_str,
             'contact': student.contact_information,
@@ -196,9 +197,9 @@ def update_student_info(student_id, name=None, gender=None,
 ########################### 3. Teachers #############################
 # 创建教师用户
 # create_teacher(姓名（必要）、性别等（非必要）) -> 新创建的教师id
-def create_teacher(name, gender=None, birthday=None, contact_information=None, department=None):
+def create_teacher(name, realName=None, gender=None, birthday=None, contact_information=None, department=None):
     user = User(identity='teacher')
-    teacher = Teacher(name=name, gender=gender, birthday=birthday, contact_information=contact_information, department=department, user=user)
+    teacher = Teacher(name=name, realName=realName, gender=gender, birthday=birthday, contact_information=contact_information, department=department, user=user)
     db.session.add(user)
     db.session.add(teacher)
     db.session.commit()
@@ -220,13 +221,17 @@ def delete_teacher(teacher_id):
 
 # 获取教师信息
 def get_info_teacher(teacher_id):
-    teacher = Teacher.query.filter_by(name=teacher_id)
+    teacher = Teacher.query.filter_by(teacher_id=teacher_id).first()
     if teacher:
-        birthday_str = datetime.strftime(teacher.birthday, '%Y-%m-%d')
+        if teacher.birthday:
+            birthday_str = datetime.strftime(teacher.birthday, '%Y-%m-%d')
+        else:
+            birthday_str = ''
         return {
             'identity': 'teacher',
             'id': teacher.teacher_id,
             'name': teacher.name,
+            'realName': teacher.realName,
             'gender': teacher.gender,
             'birthday': birthday_str,
             'contact': teacher.contact_information,

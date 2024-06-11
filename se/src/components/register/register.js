@@ -114,7 +114,6 @@ export function Register() {
                                                 options={[
                                                     {value: 'student', label: '学生'},
                                                     {value: 'teacher', label: '教师'},
-                                                    {value: 'administrator', label: '管理员'}
                                                 ]}
                                             />
                                     </Form.Item>
@@ -180,7 +179,7 @@ export function Register() {
                                         },
                                         {
                                         min: 6,
-                                        message: '请输入 6 位以上密码'
+                                        message: '请输入 6 位以上密码！'
                                         }
                                     ]}
                                     >

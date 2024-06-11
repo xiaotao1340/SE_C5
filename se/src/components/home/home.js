@@ -186,7 +186,7 @@ export function Home(){
     if(user_info){
     console.log(user_type);
 
-    const items = (user_type === 'administrator') ? [{key: '1', label: '账号', children: user_info.name}] :
+      const items = (user_type === 'administrator') ? [{key: '1', label: '账号', children: user_info.name}] :
      [
       {
         key: '1',
@@ -216,7 +216,7 @@ export function Home(){
       {
         key: '6',
         label: '学院',
-        children: user_info.department,
+        children: (user_info.department === 'cs') ? '计算机学院' : (user_info.department === 'se') ? '软件学院' : (user_info.department === 'lit') ? '人文学院' : (user_info.department === 'math') ? '数学学院' : '',
       },
       ];
       setItems(items);
@@ -274,9 +274,8 @@ export function Home(){
                      >
                      </Meta>
                       <Descriptions 
-                        style={{marginTop:'3%', width:'170%',height:'90%'}}
-                      
-                       bordered items={Items} 
+                        style={{marginTop:'3%', height:'90%'}}
+                        bordered items={Items} 
                       />
                    </Space>
                 </Card>

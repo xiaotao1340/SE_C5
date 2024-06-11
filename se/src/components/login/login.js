@@ -145,7 +145,7 @@ export function Login() {
                                         },
                                         {
                                         min: 6,
-                                        message: '请输入 6 位以上密码'
+                                        message: '请输入 6 位以上密码！'
                                         }
                                     ]}
                                     >

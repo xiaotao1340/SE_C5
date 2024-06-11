@@ -16,10 +16,12 @@ def api_get_user_info():
     user_info = get_info_of_account_by_id(user_id)
     if user_info != "未找到该用户的账号":
         if user_info["identity"] == "student":
-            user_info = get_info_student(user_id)
+            user_infonew = get_info_student(user_id)
+            user_info.update(user_infonew)
             user_info["status"] = 0
         elif user_info["identity"] == "teacher":
-            user_info = get_info_teacher(user_id)
+            user_infonew = get_info_teacher(user_id)
+            user_info.update(user_infonew)
             user_info["status"] = 0
         elif user_info["identity"] == "administrator":
             user_info["status"] = 0
@@ -33,6 +35,40 @@ def api_get_user_info():
             "error": "User not found"
         }
         return make_response(dict0, 200)
+
+@user_blue.route('/api_set_user_info', methods=['POST'])
+@jwt_required() # 需要请求携带 jwt ，即表明已登录状态
+def api_set_user_info():
+    reqData = request.get_json()
+    if (reqData['password'] == ''): password = None
+    else: password = reqData['password']
+    if (reqData['email'] == ''): email = None
+    else: email = reqData['email']
+    if (reqData['gender'] == ''): gender = None
+    else: gender = reqData['gender']
+    if (reqData['birthday'] == ''): birthday = None
+    else: birthday = reqData['birthday']
+    if (reqData['contact_information'] == ''): contact_information = None
+    else: contact_information = reqData['contact_information']
+    if (reqData['department'] == ''): department = None
+    else: department = reqData['department']
+    user_id = get_jwt_identity()
+    user_info = get_info_of_account_by_id(user_id)
+    dict0 = {}
+    if user_info["identity"] == "student":
+        ret = update_student_info(user_id, gender=gender, birthday=birthday, contact_information=contact_information, department=department)
+    elif user_info["identity"] == "teacher":
+        ret = update_teacher_info(user_id, gender=gender, birthday=birthday, contact_information=contact_information, department=department)
+    elif user_info["identity"] == "administrator":
+        ret = None
+
+    if ret == "更新成功":
+        dict0["status"] = 0
+        dict0["resp"] = ret
+    else:
+        dict0["status"] = -1
+        dict0["resp"] = "修改失败"
+    return make_response(dict0, 200)
 
 @user_blue.route('/register', methods=['POST']) # 注册路由，向 /user/register 发送请求则会被此函数捕获
 def register():

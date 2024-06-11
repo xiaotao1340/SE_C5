@@ -41,11 +41,12 @@ def register():
     password = reqData['psword']
     email = reqData['email']
     identity = reqData['identity']
+    realname = reqData['realName']
     dict0 = {}
     if identity == "student":
-        new_id = create_student(username)
+        new_id = create_student(username, realName=realname)
     elif identity == "teacher":
-        new_id = create_teacher(username)
+        new_id = create_teacher(username, realName=realname)
     elif identity == "admin":
         new_id = create_administrator()
     dict0["resp"] = create_account(new_id, username, password, email)

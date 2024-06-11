@@ -1,12 +1,10 @@
-import React, {useState}  from 'react';
+import React from 'react';
 import {  Input, Typography, Space, Button, message, Form, Row, Select} from 'antd';
 import { MailOutlined, UserOutlined, EyeInvisibleOutlined, EyeTwoTone, LockOutlined, ContactsOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import CryptoJS from 'crypto-js';
-import { BrowserRouter, Navigate, useNavigate } from 'react-router-dom'
-import UserCategorySelector from '../select/select.js';
+import { useNavigate } from 'react-router-dom'
 import { postapi } from '../request.js';
-// import { RegisterComponent } from '../request';
 
 const hashPassword = (password) => {
     return CryptoJS.SHA256(password).toString();

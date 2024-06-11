@@ -1,14 +1,10 @@
-import {Space, Input, Button, Typography, message, Checkbox, Form, Row, Select} from 'antd'
+import {Space, Input, Button, Typography, message, Form, Row, Select} from 'antd'
 import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone,  LockOutlined} from '@ant-design/icons';
-// import {LoginComponent} from '../request.js'
 import CryptoJS from 'crypto-js';
-import { BrowserRouter, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-// import UserCategorySelector from '../select/select.js';
-import React, {useState}  from 'react';
+import React from 'react';
 import { postapi } from '../request.js';
-// import { useDispatch, useSelector } from 'react-redux'
-// import { setUsers} from '../store/users.js'
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 

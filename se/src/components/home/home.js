@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { PlusOutlined,LikeOutlined } from '@ant-design/icons';
-import {Space, Table, Tag, Button, Card, Input,Avatar, Badge,Calendar, theme , Timeline} from 'antd'
-import {Progress,  Checkbox, DatePicker, Drawer, Form, message, Row, Col, Statistic} from 'antd'
-// import { account, id } from '../login/login';
+import {Space, Table, Button, Card, Input,Avatar, Calendar, theme , Timeline} from 'antd'
+import {Progress, DatePicker, Drawer, Form, message, Row, Col, Statistic} from 'antd'
 import './home.css'
 import { UserOutlined } from '@ant-design/icons';
 import { Descriptions } from 'antd';
-import { Sidenav } from '../sidenav/sidenav';
-import { postapi, getapi } from '../request';
-import { reactLocalStorage } from 'reactjs-localstorage';
+import { getapi } from '../request';
 
 // 测试用account，调用processUser获取信息
 // const account = '1234';
 // // processUser(account);
 
-const { Search } = Input;
 const { Meta } = Card;
 
 const currentDate = new Date();
@@ -152,10 +148,6 @@ const data = [
   },
 ];
 
-// function LogOUt() {
-//   reactLocalStorage.clear()
-// }
-
 export function Home(){
 
   const [user_info, setUserInfo] = useState(null);
@@ -256,54 +248,15 @@ export function Home(){
     };
 
     const [messageApi, contextHolder] = message.useMessage();
-    const success = () => {
-        messageApi.open({
-          type: 'success',
-          content: '好棒！请继续加油！',
-          className: 'custom-class',
-          style: {
-            marginTop: '5vh',
-          },
-        });
-      };
 
 	const [loading, setLoading] = useState(true);
 	const onChange = (checked) => {
 		setLoading(!checked);
 	};
 
-	
-
     return (
     <div >
-        <>  
-            {/* { 
-                
-                <Space 
-                  style={{ width: 'auto' ,marginTop:"3vh", position: 'relative'}} 
-                  className='course-title-box'
-                >
-                    <div style={{marginLeft: '5vw', display: 'flex', flexDirection: 'column'}}>
-                      <span style={{fontSize:'3vh'}} >首页</span>
-                    </div>
-                    <Search 
-                        placeholder="输入搜索" 
-                        allowClear 
-                        variant="filled"
-                        style={{ width: '20vw', marginLeft:'10%'}}
-                        size='large'
-					          />
-                    <div style={{marginLeft: '40vw'}}></div>
-
-                    <a href="/user/info">
-                      <Button type="text" style={{fontSize:'2vh', width: '4vw'}}>消息</Button>
-                    </a>
-					          <a href="/">
-                      <Button onClick={LogOUt} type="text" style={{fontSize:'2vh', width: '4vw'}}>登出</Button>
-					          </a>
-				        </Space>
-            } */}
-
+        <>
             <Space direction="vertical" size="middle" style={{display: 'flex',}}>
 
             <div >

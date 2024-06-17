@@ -103,84 +103,95 @@ export function Setinfo(){
 
     return (
         <div className="container">
-            <Row type="flex" justify="center" align="middle">
-                <Form
-                name="basic"
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-                form={form}
-                labelCol={{ flex: '100px' }}
-                >
-                <Form.Item
+            <Form
+            name="basic"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+            form={form}
+            labelCol={{ flex: '100px' }}
+            >
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item
                     label="学号"
                     name='name'
-                >
-                    <Input disabled={true} />
-                </Form.Item>
-
-                <Form.Item
-                    label="密码"
-                    name="password"
-                    rules={[{min: 6, message: '请输入 6 位以上密码'}]}
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                <Form.Item
-                    label="邮箱"
-                    name="email"
-                    rules={[{ type: 'email', message: '请输入正确邮箱' }]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
+                    >
+                        <Input disabled={true} style={{width:'20vw'}}/>
+                    </Form.Item>
+                </Row>
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item
+                        label="密码"
+                        name="password"
+                        rules={[{min: 6, message: '请输入 6 位以上密码'}]}
+                    >
+                        <Input.Password style={{width:'20vw'}}/>
+                    </Form.Item>
+                </Row>
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item
+                        label="邮箱"
+                        name="email"
+                        rules={[{ type: 'email', message: '请输入正确邮箱' }]}
+                    >
+                        <Input style={{width:'20vw'}}/>
+                    </Form.Item>
+                </Row>
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item
                     label="性别"
                     name="gender"
-                >
-                    <Select options={[
+                    >
+                        <Select
+                        options={[
                             {value: 'male', label: '男'},
                             {value: 'female', label: '女'},
                         ]}
-                    />
-                </Form.Item>
-
-                <Form.Item
+                        style={{width:'20vw'}}
+                        />
+                    </Form.Item>
+                </Row>
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item
                     label="生日"
                     name="birth"
-                >
-                    <DatePicker onChange={onChange} />
-                </Form.Item>
-
-                <Form.Item
-                    label="联系方式"
+                    >
+                        <DatePicker onChange={onChange} style={{width:'20vw'}}/>
+                    </Form.Item>
+                </Row>
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item
+                    label="手机"
                     name="contact"
                     rules={[pattern('tel')]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
+                    >
+                        <Input style={{width:'20vw'}}/>
+                    </Form.Item>
+                </Row>
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item
                     label="学院"
                     name="college"
-                >
-                    <Select options={[
+                    >
+                        <Select
+                        options={[
                             {value: 'cs', label: '计算机学院'},
                             {value: 'se', label: '软件学院'},
                             {value: 'lit', label: '人文学院'},
                             {value: 'math', label: '数学学院'},
                         ]}
-                    />
-                </Form.Item>
-
-                <Form.Item wrapperCol={{ span: 16 }}>
-                    <Button type="primary" htmlType="submit">
-                    保存
-                    </Button>
-                </Form.Item>
-                </Form>
-            </Row>
+                        style={{width:'20vw'}}
+                        />
+                    </Form.Item>
+                </Row>
+                <Row type="flex" justify="center" align="middle">
+                    <Form.Item wrapperCol={{ span: 16 }}>
+                        <Button type="primary" htmlType="submit">
+                        保存
+                        </Button>
+                    </Form.Item>
+                </Row>
+            </Form>
         </div>
     )
 }

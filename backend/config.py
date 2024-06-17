@@ -10,7 +10,7 @@ class BaseConfig(object):
     HOST = 'localhost'
     PORT = "3306"
     USERNAME = "root"
-    PASSWORD = "Lernerbay040821" # TODO
+    PASSWORD = "" # TODO
     DBNAME = 'EDU'
 
     SQLALCHEMY_DATABASE_URI = f"{DIALCT}+{DRITVER}://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?charset=utf8"

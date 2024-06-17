@@ -9,7 +9,6 @@ from apps import db
 
 from datetime import datetime
 
-# TODO: need to create session in create_app() 需将与数据库的连接建立放在 create_app() 中实现
 # db_user = ''
 # db_password = ''
 # db_host = ''
@@ -708,12 +707,12 @@ def create_evaluation(teacher_id, overall_score, score1=None, score2=None):
         print("外码引用错误:", e)
 
 # 根据评价id查询评价 -> 一个对应的列表项
-def get_tag_by_tag_id(evaluation_id):
+def get_evaluation_by_evaluation_id(evaluation_id):
     evaluation = db.session.query(Evaluation).filter_by(evaluation_id=evaluation_id).first()
     return evaluation
     
 # 根据教师id查询评价 -> 一个list，记录了对应的列表项
-def get_tag_by_tag_id(teacher_id):
+def get_evaluation_by_teacher_id(teacher_id):
     evaluation = db.session.query(Evaluation).filter_by(teacher_id=teacher_id).all()
     return evaluation
 ########################### 12. Evaluations #############################

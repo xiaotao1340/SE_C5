@@ -580,14 +580,12 @@ def get_grade_by_student_and_course(student_id, course_id):
     return grade
 
 # 根据student_id查询该学生的成绩列表
-# get_course_selections_by_student_id(user_id) -> 一个list，记录了对应的列表项
-def get_course_byelections_by_student_id(student_id):
+def get_grade_by_student_id(student_id):
     grade = db.session.query(Grade).filter_by(student_id=student_id).all()
     return grade
 
 # 根据course_id查询该课程的成绩列表
-# get_students_from_byelection_by_course_id(course_id) -> 一个list，记录了对应的列表项
-def get_students_from_byelection_by_course_id(course_id):
+def get_grade_by_course_id(course_id):
     grade = db.session.query(Grade).filter_by(course_id=course_id).all()
     return grade
 
